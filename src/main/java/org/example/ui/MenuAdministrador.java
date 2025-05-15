@@ -1,5 +1,6 @@
 package org.example.ui;
 
+import org.example.model.Federacao;
 import org.example.utils.Utils;
 
 import java.io.IOException;

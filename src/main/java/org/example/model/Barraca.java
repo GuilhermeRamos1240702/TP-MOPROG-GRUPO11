@@ -23,19 +23,24 @@ public class Barraca extends Federacao {
     }
 
 
-    public boolean adicionarVoluntarioBarraca(Voluntario a, List<Barraca> todasBarracas) {
-
-        // Verifica se o voluntário já está escalado em outra barraca no mesmo dia
-
+    public boolean adicionarVoluntarioBarraca(Voluntario v, List<Escala> arrEscala, List<Barraca> todasBarracas, int dia) {
+        for (Barraca barraca : todasBarracas) {
+            Escala escala = barraca.getArrEscala(dia);
+            if (escala != null && escala.getVoluntariosescala().contains(v)) {
+                System.out.println("Erro: Voluntário já está escalado em outra barraca no dia " + dia);
+                return false;
+            }
+        }
 
 
 
         //Verificar se o funcionário pertence á mesma instituiçao da barraca
-        if (!a.getCurso().equalsIgnoreCase(this.instituicao)) {
+        if (!v.getCurso().equalsIgnoreCase(this.instituicao)) {
             return false;
-            System.out.println("O volubntário nao pode ser incluido nesta barraca pois pertence a uma instituicao diferente");
+            System.out.println("O voluntário nao pode ser incluido nesta barraca pois pertence a uma instituicao diferente");
         }
     }
+
 
     public void adicionarVendas(VendaProdutoDia v ) {
         if (v != null) {
@@ -43,11 +48,12 @@ public class Barraca extends Federacao {
         }
     }
 
-    public Barraca(String instituicao, List<Voluntario> voluntarios, List<StockProdutoDia> stockProdutoDias, List<VendaProdutoDia> vendaProdutoDias){
+    public Barraca(String instituicao, List<Voluntario> voluntarios, List<StockProdutoDia> stockProdutoDias, List<VendaProdutoDia> vendaProdutoDias, List<Escala> arrEscala){
         this.instituicao=instituicao;
         this.voluntarios=new ArrayList<>();
         this.stockProdutoDias = new ArrayList<>();
         this.vendaProdutoDias= new ArrayList<>();
+        this.arrEscala= new ArrayList<>();
     }
 
     public String getInstituicao() {
@@ -66,6 +72,10 @@ public class Barraca extends Federacao {
         return vendaProdutoDias;
     }
 
+    public List<Escala> getArrEscala() {
+        return arrEscala;
+    }
+
     public void setInstituicao(String instituicao) {
         this.instituicao = instituicao;
     }
@@ -80,6 +90,10 @@ public class Barraca extends Federacao {
 
     public void setVendaProdutoDias(List<VendaProdutoDia> vendaProdutoDias) {
         this.vendaProdutoDias = vendaProdutoDias;
+    }
+
+    public void setArrEscala(List<Escala> arrEscala) {
+        this.arrEscala = arrEscala;
     }
 
     @Override

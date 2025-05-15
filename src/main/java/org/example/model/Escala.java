@@ -1,16 +1,16 @@
 package org.example.model;
 
+import org.example.model.Voluntario;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Escala {
-    private int[] diasAssociados;
     private int dia;
     private List<Voluntario> voluntariosescala;
 
     public Escala(int dia, List<Voluntario> voluntariosescala){
         this.dia=dia;
-        this.diasAssociados=new int[7];
         this.voluntariosescala=new ArrayList<>();
     }
 
@@ -30,9 +30,15 @@ public class Escala {
         this.voluntariosescala = voluntariosescala;
     }
 
-    public void adicionarVoluntarioEscala(Voluntario v){
-        if (!voluntariosescala.contains(v)) {
-            voluntariosescala.add(v);
+    public boolean adicionarVoluntario(Voluntario v) {
+        if (voluntariosescala.contains(v)) {
+            System.out.println("Voluntário já está nesta escala.");
+            return false;
         }
+        voluntariosescala.add(v);
+        return true;
     }
+
+
+
 }

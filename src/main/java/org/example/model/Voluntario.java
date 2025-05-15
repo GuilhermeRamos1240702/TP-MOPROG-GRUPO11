@@ -52,12 +52,16 @@ public abstract class Voluntario extends Federacao {
         return super.toString() + nome + curso + numero + password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Voluntario voluntario = (Voluntario) o;
-        return numero == voluntario.numero && password == voluntario.password && Objects.equals(nome, voluntario.nome) && Objects.equals(curso, voluntario.curso);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Voluntario)) return false;
+        Voluntario other = (Voluntario) obj;
+        return this.numero == other.numero;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(numero);
+    }
 
 }
