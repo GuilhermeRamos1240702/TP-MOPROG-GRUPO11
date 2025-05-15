@@ -26,6 +26,7 @@ public class Barraca extends Federacao implements VendasVoluntarios, StocksFinai
     }
 
     public Barraca() {
+        super();
     }
 
     public void adicionarStocks(StockProdutoDia s){

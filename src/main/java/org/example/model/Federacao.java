@@ -7,6 +7,14 @@ public class Federacao {
     private String nomefederacao;
     private List<Barraca> barracas;
 
+    public Federacao(String federaçãoAcadémicaDoPorto) {
+    }
+
+    public Federacao() {
+
+    }
+
+
     public void adicionarBarraca(Barraca b) {
         if (b != null) {
             barracas.add(b);
@@ -32,5 +40,10 @@ public class Federacao {
 
     public void setBarracas(List<Barraca> barracas) {
         this.barracas = barracas;
+    }
+
+    public boolean adicionarProduto(Produto novoProduto) {
+
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package org.example.ui;
 
 import org.example.model.Federacao;
+import org.example.model.Produto;
 import org.example.utils.Utils;
 
 public class RegistarProduto_UI {
