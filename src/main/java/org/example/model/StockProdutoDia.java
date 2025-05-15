@@ -1,13 +1,10 @@
 package org.example.model;
 
-public class StockProdutoDia extends Barraca implements StocksFinaisDiariosBarracas{
+public class StockProdutoDia extends Barraca {
     private String nomeproduto;
     private int quantidadetotal;
     private double preco;
 
-    enum Classificacao{
-        Bronze, Prata, Ouro
-    }
 
     public StockProdutoDia(String nomestock, int quantidade, double preco){
         this.nomeproduto=nomeproduto;
@@ -39,15 +36,4 @@ public class StockProdutoDia extends Barraca implements StocksFinaisDiariosBarra
         this.preco = preco;
     }
 
-    public Classificacao calcularStocksFinaisDiariosBarracas() {
-        int stockfinal = quantidadetotal - quantidadevendida;
-        if (quantidadetotal > 100) {
-            return Classificacao.Bronze;
-        }
-        if (quantidadetotal >= 50 && quantidadetotal <= 100) {
-            return Classificacao.Prata;
-        } else {
-            return Classificacao.Ouro;
-        }
-    }
 }

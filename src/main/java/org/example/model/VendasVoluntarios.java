@@ -1,5 +1,5 @@
 package org.example.model;
 
 public interface VendasVoluntarios {
-    VendaProdutoDia.Classificacao calcularVendasVoluntarios();
+    Barraca.Classificacao calcularVendasVoluntarios();
 }

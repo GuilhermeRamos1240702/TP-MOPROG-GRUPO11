@@ -1,5 +1,7 @@
 package org.example.ui;
 
+import org.example.model.Federacao;
+
 public class Main {
     public static void main(String[] args) {
         try {

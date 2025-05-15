@@ -9,6 +9,7 @@ package org.example.ui;
 //import model.ViagensTop;
 //import utils.Utils;
 
+import org.example.model.Federacao;
 import org.example.utils.Utils;
 
 import java.io.IOException;

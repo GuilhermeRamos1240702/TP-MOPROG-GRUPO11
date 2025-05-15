@@ -1,6 +1,6 @@
 package org.example.model;
 
-public class VendaProdutoDia extends Barraca implements VendasVoluntarios {
+public class VendaProdutoDia extends Barraca {
     public int quantidadevendida;
     private double rendimento;
 
@@ -33,16 +33,4 @@ public class VendaProdutoDia extends Barraca implements VendasVoluntarios {
         return "Quantidade vendida:" +quantidadevendida + ", Rendimento:" +rendimento;
     }
 
-    @Override
-    public Classificacao calcularVendasVoluntarios() {
-        if(rendimento<500){
-            return Classificacao.Bronze;
-        }
-        if(rendimento>=500 && rendimento<=100){
-            return Classificacao.Prata;
-        }
-        else {
-            return Classificacao.Ouro;
-        }
-    }
 }

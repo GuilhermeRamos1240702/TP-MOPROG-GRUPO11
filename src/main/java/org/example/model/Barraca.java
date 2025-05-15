@@ -3,7 +3,7 @@ package org.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Barraca extends Federacao {
+public class Barraca extends Federacao implements VendasVoluntarios, StocksFinaisDiariosBarracas {
 
     private String instituicao;
     private List<Voluntario> voluntarios;
@@ -11,7 +11,19 @@ public class Barraca extends Federacao {
     private List<VendaProdutoDia> vendaProdutoDias;
     private List<Escala> arrEscala;
 
+    @Override
+    public Classificacao calcularStocksFinaisDiariosBarracas() {
+        return null;
+    }
 
+    @Override
+    public Classificacao calcularVendasVoluntarios() {
+        return null;
+    }
+
+    enum Classificacao{
+        Bronze, Prata, Ouro
+    }
 
     public Barraca() {
     }
@@ -24,21 +36,25 @@ public class Barraca extends Federacao {
 
 
     public boolean adicionarVoluntarioBarraca(Voluntario v, List<Escala> arrEscala, List<Barraca> todasBarracas, int dia) {
+        Escala e = null;
         for (Barraca barraca : todasBarracas) {
-            Escala escala = barraca.getArrEscala(dia);
-            if (escala != null && escala.getVoluntariosescala().contains(v)) {
+            e = (Escala) barraca.getArrEscala(dia);
+            if (e != null && e.getVoluntariosescala().contains(v)) {
                 System.out.println("Erro: Voluntário já está escalado em outra barraca no dia " + dia);
                 return false;
             }
         }
 
 
-
         //Verificar se o funcionário pertence á mesma instituiçao da barraca
         if (!v.getCurso().equalsIgnoreCase(this.instituicao)) {
             return false;
-            System.out.println("O voluntário nao pode ser incluido nesta barraca pois pertence a uma instituicao diferente");
         }
+
+        //Adicionar voluntário á barraca
+        e.adicionarVoluntario(v);
+        System.out.println("Voluntario adicionado");
+        return true;
     }
 
 
@@ -72,7 +88,7 @@ public class Barraca extends Federacao {
         return vendaProdutoDias;
     }
 
-    public List<Escala> getArrEscala() {
+    public List<Escala> getArrEscala(int dia) {
         return arrEscala;
     }
 
@@ -100,6 +116,29 @@ public class Barraca extends Federacao {
     public String toString() {
         return "Barraca:" +instituicao+ ", Voluntarios" +voluntarios;
 
+    }
+    public Classificacao calcularStocksFinaisDiariosBarracas(List<StockProdutoDia> stockProdutoDias, int quantidadevendida, int quantidadetotal) {
+        int stockfinal = quantidadetotal - quantidadevendida;
+        if (stockfinal > 100) {
+            return StockProdutoDia.Classificacao.Bronze;
+        }
+        if (stockfinal >= 50 && stockfinal <= 100) {
+            return StockProdutoDia.Classificacao.Prata;
+        } else {
+            return StockProdutoDia.Classificacao.Ouro;
+        }
+    }
+
+    public VendaProdutoDia.Classificacao calcularVendasVoluntarios(List<VendaProdutoDia> vendaProdutoDias, double rendimento) {
+        if(rendimento<500){
+            return VendaProdutoDia.Classificacao.Bronze;
+        }
+        if(rendimento>=500 && rendimento<=100){
+            return VendaProdutoDia.Classificacao.Prata;
+        }
+        else {
+            return VendaProdutoDia.Classificacao.Ouro;
+        }
     }
 
 }
